@@ -3,6 +3,7 @@
 let firstelement = ``;
 let secondelement = ``;
 let operator = ``;
+let textBox = ``
 
 const text = document.querySelector(`.text`);
 const clear = document.getElementById(`clear`);
@@ -23,7 +24,6 @@ const multiply = document.getElementById(`multiply`);
 const divide = document.getElementById(`divide`);
 const equal = document.getElementById(`equal`);
 
-text.textContent = `hi`
 clear.addEventListener(`click`, findelement);
 backspace.addEventListener(`click`, findelement);
 zero.addEventListener(`click`, findelement);
@@ -99,6 +99,8 @@ function transformOperator(operaterString) {
 
 function findOperator(e) {
     operator = transformOperator(e.srcElement.id)
+    textBox = `${firstelement} ${operator} ${secondelement}`;
+    text.textContent = textBox;
     console.log(operator)
 }
 
@@ -106,11 +108,12 @@ function findelement(e) {
 
     if (operator.length <= 0) {
         firstelement += transformElement(e.srcElement.id);
-        console.log(firstelement);
+        textBox = firstelement
     } else if (operator) {
         secondelement += transformElement(e.srcElement.id)
-        console.log(firstelement, operator, secondelement);
+        textBox = `${firstelement} ${operator} ${secondelement}`;
     }
+    text.textContent = textBox;
 }
 
 
@@ -118,6 +121,6 @@ function findelement(e) {
 function operate() {
     if (firstelement && secondelement && operator) {
         let ans = eval(`${firstelement}${operator}${secondelement}`)
-        console.log(ans)
+        text.textContent = ans
     }
 }

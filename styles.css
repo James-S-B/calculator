@@ -26,6 +26,7 @@ p {
 .text-box {
     border: 2px solid black;
     border-radius: 4px;
+    max-width: 300px;
     min-width: 300px;
     margin-top: 15px;
     background-color: #FAE8E0;
