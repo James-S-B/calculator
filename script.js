@@ -1,8 +1,8 @@
 `strict`
 
-let firstelement;
-let secondelement;
-let operator;
+let firstelement = ``;
+let secondelement = ``;
+let operator = ``;
 
 const text = document.querySelector(`.text`);
 const clear = document.getElementById(`clear`);
@@ -21,7 +21,7 @@ const plus = document.getElementById(`plus`);
 const subtract = document.getElementById(`subtract`);
 const multiply = document.getElementById(`multiply`);
 const divide = document.getElementById(`divide`);
-
+const equal = document.getElementById(`equal`);
 
 text.textContent = `hi`
 clear.addEventListener(`click`, findelement);
@@ -40,10 +40,12 @@ plus.addEventListener(`click`, findOperator);
 divide.addEventListener(`click`, findOperator);
 subtract.addEventListener(`click`, findOperator);
 multiply.addEventListener(`click`, findOperator);
+equal.addEventListener(`click`, operate)
+
 
 
 function transformElement(numberString) {
-    switch (numberstring) {
+    switch (numberString) {
         case `zero`:
             return 0
             break
@@ -95,32 +97,27 @@ function transformOperator(operaterString) {
     }
 }
 
-function findelement(e) {
-    if (firstelement == null) {
-        firstelement = e.srcElement.id
-        console.log(firstelement)
-
-    } else {
-        secondelement = e.srcElement.id
-        console.log(secondelement)
-    }
-    if (firstelement && secondelement) {
-        firstelement = transformElement(firstelement);
-        secondelement = transformElement(secondelement);
-        console.log(`Numbers are ${firstelement} and ${secondelement}`)
-    }
-}
-
 function findOperator(e) {
     operator = transformOperator(e.srcElement.id)
     console.log(operator)
 }
 
+function findelement(e) {
+
+    if (operator.length <= 0) {
+        firstelement += transformElement(e.srcElement.id);
+        console.log(firstelement);
+    } else if (operator) {
+        secondelement += transformElement(e.srcElement.id)
+        console.log(firstelement, operator, secondelement);
+    }
+}
 
 
 
-
-
-function operate(number1, number2, operater) {
-
+function operate() {
+    if (firstelement && secondelement && operator) {
+        let ans = eval(`${firstelement}${operator}${secondelement}`)
+        console.log(ans)
+    }
 }
